@@ -38,8 +38,8 @@ jobs:
        id: laapp
        uses: azure/powershell@v1
        with:
-         inlineScript: |
-          $profile = Get-AzWebAppPublishingProfile
+         inlineScript: 
+          $profile = Get-AzWebAppPublishingProfile `
               -ResourceGroupName ${{github.event.inputs.RG_LA}}`
               -Name ${{github.event.inputs.LA_NAME}}
           $profile = $profile.Replace("`r", "").Replace("`n", "")
