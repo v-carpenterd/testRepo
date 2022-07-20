@@ -1,102 +1,95 @@
-
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-  "parameters": {
-    "logicAppname": {
-      "type": "String"
-    },
-    "appInsightName": {
-      "type": "String"
-    },
-    "use32BitWorkerProcess": {
-      "type": "Bool"
-    },
-    "location": {
-      "defaultValue": "[resourceGroup().location]",
-      "type": "String",
-      "metadata": {
-        "description": "Location to deploy resources to."
-      }
-    },
-    "hostingPlanName": {
-      "type": "String"
-    },
-    "StorageAccountName": {
-      "type": "String"
-    },
-
-
-    "sku": {
-      "type": "String"
-    },
-    "skuCode": {
-      "type": "String"
-    },
-    "workerSize": {
-      "type": "String"
-    },
-    "workerSizeId": {
-      "type": "String"
-    },
-    "numberOfWorkers": {
-      "type": "String"
-    }
-  },
-  "variables": {
-    "fileShareName": "[concat(toLower(parameters('logicAppname')), 'b86e')]"
-  },
-    "resources": [    
-      {
-        "type": "Microsoft.Storage/storageAccounts",
-        "apiVersion": "2021-04-01",
-        "name": "[parameters('StorageAccountName')]",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [       
-        ],
-        "sku": {
-          "name": "Standard_LRS",
-          "tier": "Standard"
+    "parameters": {
+        "logicAppname": {
+            "type": "string"
         },
-        "kind": "StorageV2",
-        "properties": {
-			 "mode": "Incremental",
-          "networkAcls": {
-            "bypass": "AzureServices",
-"virtualNetworkRules": [],
-	
-            "ipRules": [],
-            "defaultAction": "Allow"
-          },
-          "supportsHttpsTrafficOnly": true,
-          "encryption": {
-            "services": {
-              "file": {
-                "keyType": "Account",
-                "enabled": true
-              },
-              "blob": {
-                "keyType": "Account",
-                "enabled": true
-              }
+        "appInsightName": {
+            "type": "string"
+        },
+        "use32BitWorkerProcess": {
+            "type": "bool"
+        },
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "string",
+            "metadata": {
+                "description": "Location to deploy resources to."
+            }
+        },
+        "hostingPlanName": {
+            "type": "string"
+        },
+        "StorageAccountName": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "skuCode": {
+            "type": "string"
+        },
+        "workerSize": {
+            "type": "string"
+        },
+        "workerSizeId": {
+            "type": "string"
+        },
+        "numberOfWorkers": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "fileShareName": "[concat(toLower(parameters('logicAppname')), 'b86e')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "name": "[parameters('StorageAccountName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [],
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
             },
-            "keySource": "Microsoft.Storage"
-          }
-        }
-      },
-     
-     
-      {
-        "type": "Microsoft.Insights/components",
-        "apiVersion": "2020-02-02",
-        "name": "[parameters('logicAppname')]",
-        "location": "[resourceGroup().location]",
-        "kind": "web",
-        "properties": {
-			 "mode": "Incremental",
-          "Application_Type": "web"
-        }
-      },
+            "kind": "StorageV2",
+            "properties": {
+                "mode": "Incremental",
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Insights/components",
+            "apiVersion": "2020-02-02",
+            "name": "[parameters('logicAppname')]",
+            "location": "[resourceGroup().location]",
+            "kind": "web",
+            "properties": {
+                "mode": "Incremental",
+                "Application_Type": "web"
+            }
+        },
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
@@ -111,7 +104,7 @@
                 "type": "SystemAssigned"
             },
             "properties": {
-				 "mode": "Incremental",
+                "mode": "Incremental",
                 "name": "[parameters('logicAppname')]",
                 "siteConfig": {
                     "appSettings": [
@@ -187,9 +180,7 @@
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
                 "clientAffinityEnabled": true
             },
-            "resources": [
-                
-            ]
+            "resources": []
         },
         {
             "type": "Microsoft.Web/serverfarms",
@@ -204,7 +195,7 @@
             },
             "kind": "",
             "properties": {
-				 "mode": "Incremental",
+                "mode": "Incremental",
                 "name": "[parameters('hostingPlanName')]",
                 "workerSize": "[parameters('workerSize')]",
                 "workerSizeId": "[parameters('workerSizeId')]",
