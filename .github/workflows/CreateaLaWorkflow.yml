@@ -36,7 +36,7 @@ jobs:
         enable-AzPSSession: true
      - name: Get publish Profile
        id: laapp
-       uses: azure/powershell@v1
+       uses: azure/powershell@v2
        with:
          inlineScript: |
           $profile = Get-AzWebAppPublishingProfile
