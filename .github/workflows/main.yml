@@ -7,10 +7,10 @@ on:
  workflow_dispatch:
     inputs:
       subscriptionId:
-        description: fc945267-6f01-4806-86f1-db8dcb0ade94
+        description: 'SubscriptionId'
         required: true
       resourceGroupName:
-        description: githubDeploy
+        description: 'Resource group name'
         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
