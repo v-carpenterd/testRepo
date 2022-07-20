@@ -32,7 +32,7 @@ jobs:
     steps:
      - uses: azure/login@v1
        with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
+        creds: ${{secrets.GHUB_SECRETS}}
         enable-AzPSSession: true
      - name: Get publish Profile
        id: laapp
