@@ -31,5 +31,5 @@ jobs:
         with:
           subscriptionId: ${{github.event.inputs.subscriptionId}}
           resourceGroupName: ${{github.event.inputs.resourceGroupName}}
-          template: ./ARMTemplates/githubDeployApp.json
-          parameters: ./ARMTemplates/githubDeployParams.json
+          template: ./githubDeployApp.json
+          parameters: ./githubDeployParams.json
