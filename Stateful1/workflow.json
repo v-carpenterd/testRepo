@@ -1,0 +1,33 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "actions": {},
+    "contentVersion": "1.0.0.0",
+    "outputs": {},
+    "triggers": {
+      "Recurrence": {
+         "type": "Recurrence",
+         "recurrence": {
+            "frequency": "Week",
+            "interval": 1,
+            "schedule": {
+               "hours": [
+                  10,
+                  12,
+                  14
+               ],
+               "minutes": [
+                  30
+               ],
+               "weekDays": [
+                  "Monday"
+               ]
+            },
+            "startTime": "2020-09-07T14:00:00Z",
+            "timeZone": "Pacific Standard Time"
+         }
+      }
+   }
+  },
+  "kind": "Stateful"
+}
